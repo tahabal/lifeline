@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { Layout } from "antd";
+import { observer, inject } from "mobx-react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import Container from "./components/Container";
+
+class App extends Component {
+  async componentDidMount() {
+    console.log(this.props);
+    this.props.store.showLoader();
+    this.props.store.fetchData();
+
+    const fauxLag = ms => new Promise(resolve => setTimeout(resolve, ms));
+    await fauxLag(1000);
+
+    this.props.store.hideLoader();
+  }
+
+  render() {
+    return (
+      <Layout>
+        <Sidebar />
+        <Layout style={{ marginLeft: 200, display: "flex", height: "100vh" }}>
+          <Header />
+          <Container />
+        </Layout>
+      </Layout>
+    );
+  }
 }
+
+App = inject("store")(observer(App));
 
 export default App;
