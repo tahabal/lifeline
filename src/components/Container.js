@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Layout, Spin } from "antd";
+import { Layout, Spin, Empty } from "antd";
 import { observer, inject } from "mobx-react";
 
 import Panel from "./Panel";
@@ -9,9 +9,14 @@ const { Content } = Layout;
 
 class Container extends Component {
   render() {
-    const renderPanels = this.props.store.data.map(item => {
-      return <Panel data={item} key={item.id} />;
-    });
+    let renderPanels =
+      this.props.store.data.length > 0 ? (
+        this.props.store.data.map(item => {
+          return <Panel data={item} key={item.id} />;
+        })
+      ) : (
+        <Empty description={<span>No entries found.</span>} />
+      );
 
     return (
       <Spin
