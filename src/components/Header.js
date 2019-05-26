@@ -16,6 +16,7 @@ class Header extends Component {
           <Col span={6}>
             <Input
               placeholder="Search"
+              disabled={this.props.store.newEntryMode}
               suffix={
                 <Icon type="search" style={{ color: "rgba(0,0,0,.45)" }} />
               }

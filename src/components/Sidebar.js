@@ -6,6 +6,10 @@ const Sider = Layout.Sider;
 
 class Sidebar extends Component {
   handleSelect = async item => {
+    if (item.key === "ADD") {
+      this.props.store.setNewEntryMode();
+      return;
+    }
     this.props.store.showLoader();
     const fauxLag = ms => new Promise(resolve => setTimeout(resolve, ms));
     await fauxLag(1000);
@@ -52,6 +56,10 @@ class Sidebar extends Component {
           <Menu.Item key="SOAP">
             <Icon type="upload" />
             <span className="nav-text">SOAP</span>
+          </Menu.Item>
+          <Menu.Item key="ADD">
+            <Icon type="upload" />
+            <span className="nav-text">Create New Endpoint</span>
           </Menu.Item>
         </Menu>
       </Sider>

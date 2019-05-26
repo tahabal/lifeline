@@ -11,6 +11,7 @@ class Store {
   data = [];
   loading = false;
   isSearchFilterActive = false;
+  newEntryMode = false;
   selectedType = "ALL";
 
   handleSearch(keyword) {
@@ -25,11 +26,16 @@ class Store {
   }
 
   handleMenu(type) {
+    this.newEntryMode = false;
     this.selectedType = type;
 
     this.searchKeyword = "";
 
     this.debouncedFetch();
+  }
+
+  setNewEntryMode() {
+    this.newEntryMode = true;
   }
 
   //sidebar controller
@@ -98,6 +104,8 @@ class Store {
 
 decorate(Store, {
   searchKeyword: observable,
+  newEntryMode: observable,
+  setNewEntryMode: action,
   selectedType: observable,
   response: observable,
   filterByType: action,

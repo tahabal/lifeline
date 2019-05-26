@@ -3,6 +3,7 @@ import { Layout, Spin } from "antd";
 import { observer, inject } from "mobx-react";
 
 import Panel from "./Panel";
+import AddPanel from "./Add";
 
 const { Content } = Layout;
 
@@ -31,7 +32,12 @@ class Container extends Component {
               minHeight: "100%"
             }}
           >
-            {!this.props.store.loading && renderPanels}
+            {!this.props.store.loading &&
+              !this.props.store.newEntryMode &&
+              renderPanels}
+            {!this.props.store.loading && this.props.store.newEntryMode && (
+              <AddPanel />
+            )}
           </div>
         </Content>
       </Spin>

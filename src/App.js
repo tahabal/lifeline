@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Layout } from "antd";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { observer, inject } from "mobx-react";
 
 import Header from "./components/Header";
